@@ -14,7 +14,7 @@ namespace ESGI.DesignPattern.Projet.Tests
             order.Add(new Product(6789, "Socks", ProductSize.Medium, "8.00"));
             orders.Add(order);
 
-            var ordersWriter = new OrdersWriter(orders);
+            var ordersWriter = orders.Format();
 
             var expectedOrder =
                 "<orders>" +
@@ -33,7 +33,7 @@ namespace ESGI.DesignPattern.Projet.Tests
                         "</product>" +
                     "</order>" +
                 "</orders>";
-            Assert.Equal(expectedOrder, ordersWriter.GetContents());
+            Assert.Equal(expectedOrder, ordersWriter);
         }
 
         [Fact]

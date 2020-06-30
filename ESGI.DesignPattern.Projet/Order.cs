@@ -1,36 +1,51 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace ESGI.DesignPattern.Projet
 {
-    public class Order
+    public class Order: IXmlFormattable
     {
-        private readonly int id;
-        private List<Product> products;
+        public int Id { get; }
+
+        private readonly List<IXmlFormattable> _products;
 
         public Order(int id)
         {
-            this.products = new List<Product>();
-            this.id = id;
-        }
-
-        public int OrderId()
-        {
-            return this.id;
+            this._products = new List<IXmlFormattable>();
+            this.Id = id;
         }
 
         public void Add(Product product)
         {
-            this.products.Add(product);
+            this._products.Add(product);
         }
 
         public int ProductCount()
         {
-            return this.products.Count;
+            return this._products.Count;
         }
 
-        public Product Product(int insertionIndex)
+        public IXmlFormattable Product(int insertionIndex)
         {
-            return this.products[insertionIndex];
+            return this._products[insertionIndex];
+        }
+        
+        public string Format()
+        {
+            StringBuilder xml = new StringBuilder();
+            xml.Append("<order");
+            xml.Append(" id='");
+            xml.Append(Id);
+            xml.Append("'>");
+            for (int j = 0; j < ProductCount(); j++)
+            {
+                IXmlFormattable product = Product(j);
+                xml.Append(product.Format());
+            }
+
+            xml.Append("</order>");
+
+            return xml.ToString();
         }
     }
 }
