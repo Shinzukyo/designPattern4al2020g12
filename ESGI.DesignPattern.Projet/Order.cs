@@ -32,20 +32,9 @@ namespace ESGI.DesignPattern.Projet
         
         public string Format()
         {
-            StringBuilder xml = new StringBuilder();
-            xml.Append("<order");
-            xml.Append(" id='");
-            xml.Append(Id);
-            xml.Append("'>");
-            for (int j = 0; j < ProductCount(); j++)
-            {
-                IXmlFormattable product = Product(j);
-                xml.Append(product.Format());
-            }
-
-            xml.Append("</order>");
-
-            return xml.ToString();
+            return XmlConverter
+                .Create(XmlConverter.FormattableType.Order)
+                .Convert(this);
         }
     }
 }

@@ -29,16 +29,9 @@ namespace ESGI.DesignPattern.Projet
 
         public string Format()
         {
-            StringBuilder xml = new StringBuilder();
-            xml.Append("<orders>");
-            for (int i = 0; i < OrderCount(); i++)
-            {
-                Order order = Order(i);
-                xml.Append(order.Format());
-            }
-
-            xml.Append("</orders>");
-            return xml.ToString();
+            return XmlConverter
+                .Create(XmlConverter.FormattableType.Orders)
+                .Convert(this);
         }
     }
 }

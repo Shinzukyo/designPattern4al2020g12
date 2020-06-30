@@ -2,8 +2,8 @@
 {
     public interface IWrapper
     {
-        void add(IXmlFormattable xmlFormattable);
-        int count();
-        IXmlFormattable getChild(int index);
+        void AddChild(IXmlFormattable xmlFormattable);
+        int CountChildren();
+        IXmlFormattable GetChild(int index);
     }
 }

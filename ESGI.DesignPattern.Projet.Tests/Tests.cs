@@ -10,8 +10,8 @@ namespace ESGI.DesignPattern.Projet.Tests
         {
             var orders = new Orders();
             var order = new Order(1234);
-            order.Add(new Product(4321, "T-Shirt", ProductSize.Medium, "21.00"));
-            order.Add(new Product(6789, "Socks", ProductSize.Medium, "8.00"));
+            order.Add(new Product(4321, "T-Shirt", new MediumSize(), new Price("21.00", "USD"), "red"));
+            order.Add(new Product(6789, "Socks", new MediumSize(), new Price("8.00", "USD"), "red"));
             orders.Add(order);
 
             var ordersWriter = orders.Format();
@@ -40,13 +40,13 @@ namespace ESGI.DesignPattern.Projet.Tests
         public void GetContents_produces_no_orders()
         {
             var orders = new Orders();
-            var ordersWriter = new OrdersWriter(orders);
+            var ordersWriter = orders.Format();
 
             var expectedOrder =
             "<orders>" +
             "</orders>";
 
-            Assert.Equal(expectedOrder, ordersWriter.GetContents());
+            Assert.Equal(expectedOrder, ordersWriter);
         }
     }
 }
